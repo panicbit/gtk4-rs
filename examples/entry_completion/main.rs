@@ -40,9 +40,11 @@ fn build_ui(application: &Application) {
     win_title.set_markup("<big>Which country would you like to spend a holiday in?</big>");
 
     // Create an EntryCompletion widget
-    let completion_countries = EntryCompletion::new();
-    // Use the first (and only) column available to set the autocompletion text
-    completion_countries.set_text_column(0);
+    let completion_countries = EntryCompletion::builder()
+        // Use the first (and only) column available to set the autocompletion text
+        .text_column(0)
+        .build();
+
     // how many keystrokes to wait before attempting to autocomplete?
     completion_countries.set_minimum_key_length(1);
     // whether the completions should be presented in a popup window
