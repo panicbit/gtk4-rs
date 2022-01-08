@@ -2,6 +2,7 @@
 
 use crate::Snapshot;
 use glib::translate::*;
+use glib::Cast;
 
 impl Snapshot {
     #[doc(alias = "gtk_snapshot_append_border")]
@@ -26,5 +27,11 @@ impl Snapshot {
     #[doc(alias = "gtk_snapshot_push_debug")]
     pub fn push_debug(&self, message: &str) {
         unsafe { ffi::gtk_snapshot_push_debug(self.to_glib_none().0, message.to_glib_none().0) }
+    }
+}
+
+impl AsRef<Snapshot> for gdk::Snapshot {
+    fn as_ref(&self) -> &Snapshot {
+        self.downcast_ref().unwrap()
     }
 }
